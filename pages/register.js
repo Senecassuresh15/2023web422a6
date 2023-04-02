@@ -17,12 +17,7 @@ export default function Login(props) {
       await registerUser(user, password, password2);
       router.push("/login");
     } catch (err) {
-        //doesn't work
-      if (Object.keys(err.message).length === 0) {
-        router.push("/login");
-      } else {
         setWarning(err.message);
-      }
     }
   }
 

@@ -3,8 +3,10 @@ import { useAtom } from "jotai";
 import { useRouter } from "next/router";
 import { ListGroup, Card, Button } from "react-bootstrap";
 import styles from "../styles/History.module.css";
-import ReactHtmlParser from "react-html-parser"; // https://stackoverflow.com/questions/39758136/how-to-render-html-string-as-real-html
+// import ReactHtmlParser from "react-html-parser"; // https://stackoverflow.com/questions/39758136/how-to-render-html-string-as-real-html
 //installed using npm --force
+//https://stackoverflow.com/questions/71185391/unable-to-resolve-dependency-for-installing-html-parser
+import parse from 'html-react-parser';
 import { removeFromHistory } from "@/lib/userData";
 
 export default function History() {
@@ -41,7 +43,6 @@ export default function History() {
 
   async function removeHistoryClicked(e, index) {
     e.stopPropagation(); // stop the event from trigging other events
-    //doesn't work
     setSearchHistory(await removeFromHistory(searchHistory[index]));
   }
 
@@ -60,14 +61,14 @@ export default function History() {
               key={index}
               onClick={(e) => historyClicked(e, index)}
             >
-              {ReactHtmlParser(parseHistoryItem(historyItem))}
+              {parse(parseHistoryItem(historyItem))}
               {/* https://stackoverflow.com/questions/39758136/how-to-render-html-string-as-real-html */}
               <Button
                 className="float-end"
                 variant="danger"
                 size="sm"
                 onClick={(e) => removeHistoryClicked(e, index)}
-              >
+              > 
                 &times;
               </Button>
             </ListGroup.Item>

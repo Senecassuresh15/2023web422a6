@@ -1,3 +1,7 @@
+//mainNav layout a little off
+//should have a padding so it will be in the center when no hamburger menu
+//but i dont like css
+
 import { Container, Nav, Navbar, Form, Button } from "react-bootstrap";
 import { useState } from "react";
 import { useRouter } from "next/router";
